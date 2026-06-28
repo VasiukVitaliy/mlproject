@@ -1,0 +1,22 @@
+[build-system]
+
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlproject"
+version = "0.1.0"
+description = "ml проєкт, який нікому не всрався"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+  { name = "Corner_maniac", email = "vitaliy98765321@gmail.com" }
+]
+
+dynamic = ["dependencies"]
+
+[tool.setuptools]
+packages = { find = {} }
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
