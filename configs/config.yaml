@@ -1,0 +1,9 @@
+general_config:
+  artifact_folder: artifact
+  subfolder_path: on-datetime
+
+data_ingestion:
+  folder_name: data_ingestion
+  data_path: data/stud.csv
+  train_path: train_data.csv
+  test_path: test_data.csv
