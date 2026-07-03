@@ -23,8 +23,8 @@ class DataIngestions:
             train_data, test_data = train_test_split(data, test_size = self.params.test_size, random_state=self.params.random_state)
             logging.info("Splitting data was successfully. Saving data...")
         
-            train_data.to_csv(self.config.train_path)
-            test_data.to_csv(self.config.test_path)
+            train_data.to_csv(self.config.train_path, index = None)
+            test_data.to_csv(self.config.test_path, index = None)
             logging.info("Saving data was successfully. Creating artifact...")
         
             artifact = DataIngestionArtifact(

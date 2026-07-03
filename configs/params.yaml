@@ -1,2 +1,4 @@
 test_size: 0.2
 random_state: 42
+missing_threshold: 0.3
+pvalue_threshold: 0.05

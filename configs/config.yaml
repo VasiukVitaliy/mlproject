@@ -7,3 +7,12 @@ data_ingestion:
   data_path: data/stud.csv
   train_path: train_data.csv
   test_path: test_data.csv
+
+data_validation:
+  folder_name: data_validation
+  valid_train_data_path: valid_train_data
+  invalid_train_data_path: invalid_train_data
+  valid_test_data_path: valid_test_data
+  invalid_test_data_path: invalid_test_data
+  data_drift_report: report.html
+  schema_path: schemas/schema.yaml

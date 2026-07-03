@@ -1,4 +1,4 @@
-from src.entities.configs import DataIngestionConfig
+from src.entities.configs import DataIngestionConfig, DataValidationConfig
 from src.exeptions import CustomException
 from src.utils.utils import read_yaml
 from src.logger import logging
@@ -33,6 +33,27 @@ class ConfigManager:
             data_path= self.config.data_ingestion.data_path,
             train_path= ingestion_path / self.config.data_ingestion.train_path,
             test_path= ingestion_path / self.config.data_ingestion.test_path
+            )
+            return config
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+    def get_validation_config(self)->DataIngestionConfig:
+        try:
+            data_validation = self.config.data_validation
+            validation_path = self.artifact_path / data_validation.folder_name
+            validation_path.mkdir(exist_ok=True)
+            
+            config = DataValidationConfig(
+                valid_train_data_path= validation_path / data_validation.valid_train_data_path,
+                invalid_train_data_path= validation_path / data_validation.invalid_train_data_path,
+                valid_test_data_path= validation_path / data_validation.valid_test_data_path,
+                invalid_test_data_path= validation_path / data_validation.invalid_test_data_path,
+                data_drift_report= validation_path / data_validation.data_drift_report,
+                schema_path= Path(data_validation.schema_path),
+                missing_threshold= self.params.missing_threshold,
+                drift_p_value_threshold=self.params.pvalue_threshold
+                
             )
             return config
         except Exception as e:
