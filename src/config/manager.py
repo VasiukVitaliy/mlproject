@@ -1,4 +1,4 @@
-from src.entities.configs import DataIngestionConfig, DataValidationConfig
+from src.entities.configs import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from src.exeptions import CustomException
 from src.utils.utils import read_yaml
 from src.logger import logging
@@ -38,7 +38,7 @@ class ConfigManager:
         except Exception as e:
             raise CustomException(e, sys)
         
-    def get_validation_config(self)->DataIngestionConfig:
+    def get_validation_config(self)->DataValidationConfig:
         try:
             data_validation = self.config.data_validation
             validation_path = self.artifact_path / data_validation.folder_name
@@ -54,6 +54,22 @@ class ConfigManager:
                 missing_threshold= self.params.missing_threshold,
                 drift_p_value_threshold=self.params.pvalue_threshold
                 
+            )
+            return config
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+    def get_transformation_config(self)->DataTransformationConfig:
+        try:
+            data_transformation = self.config.data_transformation
+            tranformation_path = self.artifact_path / data_transformation.folder_name
+            tranformation_path.mkdir(exist_ok = True)
+            config = DataTransformationConfig(
+                transformer= tranformation_path / data_transformation.transformer,
+                train_folder= Path.cwd() / data_transformation.folder_name / data_transformation.train_folder,
+                test_folder= Path.cwd() / data_transformation.folder_name / data_transformation.test_folder,
+                input_data_name=data_transformation.input_file_name,
+                output_data_name=data_transformation.output_file_name
             )
             return config
         except Exception as e:

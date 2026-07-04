@@ -118,12 +118,11 @@ class DataValidation:
 
             return DataValidationArtifact(
                 validation_status=validation_status,
-                valid_train_file_path=self.config.valid_train_data_path if train_valid else None,
-                valid_test_file_path=self.config.valid_test_data_path if test_valid else None,
-                invalid_train_file_path=None if train_valid else self.config.invalid_train_data_path,
-                invalid_test_file_path=None if test_valid else self.config.invalid_test_data_path,
-                drift_report_file_path=self.config.data_drift_report,
-                validation_status: validation_status
+                valid_train_file_path=self.config.valid_train_data_path / "train_data.csv" if train_valid else None,
+                valid_test_file_path=self.config.valid_test_data_path / "test_data.csv" if test_valid else None,
+                invalid_train_file_path=None if train_valid else self.config.invalid_train_data_path  / "train_data.csv",
+                invalid_test_file_path=None if test_valid else self.config.invalid_test_data_path / "test_data.csv",
+                drift_report_file_path=self.config.data_drift_report
             )
         except Exception as e:
             raise CustomException(e, sys)

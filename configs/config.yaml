@@ -16,3 +16,11 @@ data_validation:
   invalid_test_data_path: invalid_test_data
   data_drift_report: report.html
   schema_path: schemas/schema.yaml
+
+data_transformation:
+  folder_name: data
+  train_folder: processed/train
+  test_folder: processed/test
+  input_file_name: input.npy
+  output_file_name: output.npy
+  transformer: preprocessor.pkl

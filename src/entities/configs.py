@@ -21,3 +21,10 @@ class DataValidationConfig:
     missing_threshold: float
     drift_p_value_threshold: float
     
+@dataclass
+class DataTransformationConfig:
+    transformer: Path
+    input_data_name: str
+    output_data_name: str
+    train_folder: Path
+    test_folder: Path
