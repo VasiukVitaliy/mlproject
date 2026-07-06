@@ -2,3 +2,60 @@ test_size: 0.2
 random_state: 42
 missing_threshold: 0.3
 pvalue_threshold: 0.05
+
+models: ["AdaBoostRegressor","GradientBoostingRegressor","RandomForestRegressor",
+                    "CatBoostRegressor","LinearRegressor", "DecisionTreeRegressor", "XGBRegressor"]
+
+model_params:
+  AdaBoostRegressor:
+    learning_rate:
+      type: float
+      val: [0.001, 0.1]
+    n_estimators:
+      type: int
+      val: [8, 256]
+
+  GradientBoostingRegressor:
+    learning_rate:
+      type: float
+      val: [0.001, 0.1]
+    subsample:
+      type: float
+      val: [0.6, 0.9]
+    n_estimators:
+      type: int
+      val: [8, 256]
+
+  RandomForestRegressor:
+    n_estimators:
+      type: int
+      val: [8, 256]
+
+  CatBoostRegressor:
+    depth:
+      type: int
+      val: [6, 10]
+    learning_rate:
+      type: float
+      val: [0.01, 0.1]
+    iterations:
+      type: int
+      val: [30, 100]
+
+  LinearRegressor: {}
+
+  DecisionTreeRegressor:
+    splitter:
+      type: categorical
+      val: ["best", "random"]
+    criterion:
+      type: categorical
+      val: ["squared_error", "friedman_mse", "absolute_error", "poisson"]
+
+  XGBRegressor:
+    learning_rate:
+      type: float
+      val: [0.001, 0.1]
+    n_estimators:
+      type: int
+      val: [8, 256]

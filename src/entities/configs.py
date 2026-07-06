@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Literal
 from pathlib import Path
 from box import ConfigBox
 
@@ -28,3 +29,12 @@ class DataTransformationConfig:
     output_data_name: str
     train_folder: Path
     test_folder: Path
+
+@dataclass
+class ModelTrainingConfig:
+    model_path: Path
+    models: Literal["AdaBoostRegressor","GradientBoostingRegressor","RandomForestRegressor",
+                    "CatBoostRegressor","LinearRegressor", "DecisionTreeRegressor", "XGBRegressor"]
+    params: ConfigBox
+    report_path: Path
+    

@@ -2,7 +2,7 @@ from src.entities.configs import DataTransformationConfig
 from src.entities.artifact import DataTransformationArtifact
 from src.logger import logging
 from src.exeptions import CustomException
-from src.utils.utils import write_npy
+from src.utils.utils import write_npy, save_model
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 import sys
@@ -69,6 +69,8 @@ class DataTransformations:
             write_npy(y_train, self.config.train_folder / self.config.output_data_name)
             write_npy(y_test, self.config.test_folder / self.config.output_data_name)
             logging.info("All transformed arrays saved successfully")
+            
+            save_model(preprocessor, self.config.transformer)
 
             artifact = DataTransformationArtifact(
                 transformer=self.config.transformer,

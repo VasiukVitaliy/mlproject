@@ -3,9 +3,11 @@ numpy
 seaborn
 matplotlib
 scikit-learn
-catboost
 xgboost
 Flask
 python-box
+optuna
+catboost
+boto3
 pyyaml
 ensure

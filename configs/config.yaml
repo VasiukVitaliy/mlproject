@@ -24,3 +24,8 @@ data_transformation:
   input_file_name: input.npy
   output_file_name: output.npy
   transformer: preprocessor.pkl
+
+model_training:
+  folder_name: model_training
+  model_filename:  model.pkl
+  report_filename: report.html

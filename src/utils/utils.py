@@ -1,3 +1,7 @@
+from src.exeptions import CustomException
+import boto3
+import pickle
+import sys
 import yaml
 from pathlib import Path
 import numpy as np
@@ -48,5 +52,35 @@ def write_npy(arr: np.ndarray, path_to_file: Path) -> None:
     except Exception as e:
         raise e
     
+def load_npy(path_to_file: Path) -> np.array:
+    """Load a numpy array from a .npy file.
+
+    Args:
+        path_to_file (Path): path where the .npy file will be read.
+
+    Raises:
+        e: any exception raised during file writing.
+
+    Returns:
+        data: data from file
+    """
+    try:
+        with open(path_to_file, "rb") as file:
+            data = np.load(file)
+            return data
+    except Exception as e:
+        raise e
     
-       
+def save_model(obj, path_to_file: Path):
+    try:
+        with open(path_to_file, "wb") as file:
+            pickle.dump(obj, file)
+    except Exception as e:
+        raise CustomException(e,sys)
+    
+def load_model(path_to_file: Path):
+    try:
+        with open(path_to_file, "rb") as file:
+            return pickle.load(file)
+    except Exception as e:
+        raise CustomException(e, sys)

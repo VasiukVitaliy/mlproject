@@ -23,3 +23,8 @@ class DataTransformationArtifact:
     output_data_name: str
     train_folder: Path
     test_folder: Path
+    
+@dataclass
+class ModelTrainingArtifact:
+    model_path: Path
+    report_path: Path

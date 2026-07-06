@@ -1,4 +1,4 @@
-from src.entities.configs import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.entities.configs import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainingConfig
 from src.exeptions import CustomException
 from src.utils.utils import read_yaml
 from src.logger import logging
@@ -70,6 +70,21 @@ class ConfigManager:
                 test_folder= Path.cwd() / data_transformation.folder_name / data_transformation.test_folder,
                 input_data_name=data_transformation.input_file_name,
                 output_data_name=data_transformation.output_file_name
+            )
+            return config
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+    def get_training_config(self)->ModelTrainingConfig:
+        try:
+            model_training = self.config.model_training
+            training_path = self.artifact_path / model_training.folder_name
+            training_path.mkdir(exist_ok = True)
+            config = ModelTrainingConfig(
+                model_path= training_path / model_training.model_filename,
+                models= self.params.models,
+                params=self.params.model_params,
+                report_path=  training_path / model_training.report_filename
             )
             return config
         except Exception as e:
