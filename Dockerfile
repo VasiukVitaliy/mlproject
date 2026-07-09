@@ -8,4 +8,4 @@ RUN pip install uv && uv pip install --system -r requirements.txt
 
 COPY . .
 
-CMD [ "python", "app.py" ]
+CMD ["uv", "run", "--with", "gunicorn", "gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
