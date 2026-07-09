@@ -13,4 +13,4 @@ COPY . .
 
 ENV PYTHONPATH=/app
 
-CMD ["uv", "run", "gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+CMD ["uv", "run", "--with", "gunicorn", "gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
